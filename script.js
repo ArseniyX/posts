@@ -8,12 +8,7 @@ onload = async () => {
   addPosts(await getDataFromApi(POSTS));
 };
 
-const getDataFromApi = (url) =>
-  fetch(url)
-    .then((result) => result.json())
-    .then((posts) => {
-      return posts;
-    });
+const getDataFromApi = (url) => fetch(url).then((result) => result.json());
 
 const addPosts = (posts) => {
   posts.forEach((post) => {
@@ -54,7 +49,8 @@ const createPostElement = (post) => {
   const titleElement = createTextElement("h2", post.title, "title");
   const exitButton = createExitButton();
   const bodyElement = createTextElement("p", post.body, "post-body");
-  createCommentElement(post.id);
+  const commentElement = createCommentElement(post.id);
+  console.log(commentElement);
   return [titleElement, bodyElement, exitButton];
 };
 
