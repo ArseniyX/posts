@@ -60,21 +60,18 @@ const createPostElement = (post) => {
 
 const createCommentElement = async (id) => {
   const commentsElement = document.createElement("div");
-  const comments = await getDataFromApi(commentsURL(id), addComments);
-  comments.forEach((commentObject) => {
+  const comments = await getDataFromApi(commentsURL(id));
+  comments.forEach(({ name, email, body }) => {
     const commentElement = document.createElement("div");
-    commentElement.classList.add("comment")
-    const name = createTextElement("p", commentObject.name, "comment-name");
-    const email = createTextElement("p", commentObject.email, "comment-email");
-    const body = createTextElement("p", commentObject.body, "comment-body");
-    appendElements([name, email, body], commentElement);
+    commentElement.classList.add("comment");
+    const nameElement = createTextElement("p", name, "comment-name");
+    const emailElement = createTextElement("p", email, "comment-email");
+    const bodyElement = createTextElement("p", body, "comment-body");
+    appendElements([nameElement, emailElement, bodyElement], commentElement);
     commentsElement.append(commentElement);
-    console.log(commentObject);
   });
   postContainer.append(commentsElement);
 };
-
-const addComments = () => {};
 
 const createExitButton = () => {
   const exitButton = document.createElement("button");
